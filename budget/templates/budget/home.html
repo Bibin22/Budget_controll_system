@@ -1,0 +1,4 @@
+{% extends 'budget/base.html' %}
+{% block body_block %}
+<a href="{% url 'signout' %}">{{request.user}}Logout</a>
+{% endblock %}

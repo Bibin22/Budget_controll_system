@@ -1,0 +1,29 @@
+
+{% extends 'budget/base.html' %}
+{% block body_block %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Search">
+</form>
+<table class="table table-dark">
+    <tr>
+        <td>Slno</td>
+         <td>Category</td>
+         <td>notes</td>
+         <td>ammount</td>
+         <td>date</td>
+    </tr>
+    {% for expence in expenses %}
+    <tr>
+        <td>{{ expence.id }}</td>
+        <td>{{ expence.category }}</td>
+        <td>{{ expence.notes }}</td>
+        <td>{{ expence.amount }}</td>
+        <td>{{ expence.date }}</td>
+        <td><a href="{% url 'edit' expence.id %}" class="btn btn-outline-primary">Edit</a></td>
+        <td><a href="{% url 'delete' expence.id %}"class="btn btn-outline-danger">Delete </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
