@@ -114,9 +114,10 @@ def review_expense(request):
             from_date = form.cleaned_data.get("from_date")
             to_date = form.cleaned_data.get("to_date")
             total = Expence.objects.filter(date__gte=from_date, date__lte=to_date, user=request.user).aggregate(Sum('amount'))
-
+            total = total["amount__sum"]
 
             context = {
+                "form":form,
                 "total": total,
             }
     return render(request, 'budget/review.html', context)
